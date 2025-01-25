@@ -29,7 +29,7 @@ PROMPT="Create java code for this cobol program:        IDENTIFICATION DIVISION.
        MAIN-PARA.
            CALL 'ADD-FUNCTION' USING NUM1 NUM2 RESULT.
 
-           DISPLAY "The ans of addition is: " RESULT.
+           DISPLAY "Result: " RESULT.
 
            STOP RUN.
 
