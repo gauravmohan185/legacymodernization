@@ -36,5 +36,6 @@ jobs:
            ./scripts/convert.sh
            git config --global user.email "gauravmohan185@live.com"
            git config --global user.name "Gaurav Mohan"
+           git status
            git add .
            git commit -m "added generated java code"
