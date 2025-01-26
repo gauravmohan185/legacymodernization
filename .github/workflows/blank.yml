@@ -34,3 +34,5 @@ jobs:
         run: |
           chmod +x ./scripts/convert.sh
            ./scripts/convert.sh
+           git add .
+           git commit -m "added generated java code"
