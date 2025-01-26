@@ -33,4 +33,4 @@ RESPONSE=$(curl -s -X POST $ENDPOINT \
 echo "Raw response $RESPONSE"
 
 #FORMAT_RESPONSE=$(echo "$RESPONSE" | sed '1d;$d' | sed '1d;$d' | sed '1d;$d' | sed '/^```/d' |sed '/###/,$d' | sed -e 's/{/ {\n    /g' -e 's/;[ ]*/;\n    /g' -e 's/}/\n}/g' -e 's/    }/}/g')
-echo "$RESPONSE"  | jq -r '.choices[0].message.content' | sed -n '/```/,/```/p' | sed 's/```[a-z]*//g' | sed -e 's/{/ {\n    /g' -e 's/;[ ]*/;\n    /g' -e 's/}/\n}/g' -e 's/    }/}/g' | sed '/^$/d' >  ../src/java/AddNumbersFunction.java
+echo "$RESPONSE"  | jq -r '.choices[0].message.content' | sed -n '/```/,/```/p' | sed 's/```[a-z]*//g' | sed -e 's/{/ {\n    /g' -e 's/;[ ]*/;\n    /g' -e 's/}/\n}/g' -e 's/    }/}/g' | sed '/^$/d' >  src/java/AddNumbersFunction.java
