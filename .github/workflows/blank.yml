@@ -39,3 +39,4 @@ jobs:
            git status
            git add .
            git commit -m "added generated java code"
+           git push
