@@ -1,6 +1,64 @@
-To create a test case for the `AddNumbersFunction` class in Java, we can use JUnit, a popular testing framework for Java. Below is an example of a test case code that tests the `addFunction`. We will create a separate test class to test the `addFunction` method.
+Certainly! To create a test case for the `AddNumbersFunction` class in Java, you can use the JUnit testing framework. Below is an example of how you might write a test case for the `addFunction` method.
 
-First, ensure that you have JUnit included in your project dependencies. If you are using Maven, you would include it in your `pom.xml` file like this:
+Assuming you have JUnit set up in your project, you can create a test class like this:
+
+
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+
+public class AddNumbersFunctionTest {
+
+    @Test
+    public void testAddFunction() {
+        // Given
+        int num1 = 12345;
+        int num2 = 54321;
+
+        // When
+        int result = AddNumbersFunction.addFunction(num1, num2);
+
+        // Then
+        assertEquals(66666, result);
+    }
+    
+    @Test
+    public void testAddFunctionWithNegativeAndPositive() {
+        // Given
+        int num1 = -100;
+        int num2 = 200;
+
+        // When
+        int result = AddNumbersFunction.addFunction(num1, num2);
+
+        // Then
+        assertEquals(100, result);
+    }
+    
+    @Test
+    public void testAddFunctionWithZero() {
+        // Given
+        int num1 = 0;
+        int num2 = 123;
+
+        // When
+        int result = AddNumbersFunction.addFunction(num1, num2);
+
+        // Then
+        assertEquals(123, result);
+    }
+}
+
+
+### Explanation:
+1. **JUnit Test Class:** `AddNumbersFunctionTest` is a test class designed to test the `AddNumbersFunction`.
+2. **Test Annotations:** Each test method is annotated with `@Test`, indicating that it is a test case.
+3. **Test Cases:**
+   - **testAddFunction:** This tests the normal addition behavior by adding `12345` and `54321` and asserting that the result is `66666`.
+   - **testAddFunctionWithNegativeAndPositive:** This tests adding a negative number and a positive number.
+   - **testAddFunctionWithZero:** This tests adding zero to another number, ensuring the output matches the other number.
+
+### Running the Test:
+To execute the tests, you can use your IDE's testing capabilities, or build tools like Maven or Gradle, depending on your project's setup. Make sure you have JUnit in your classpath. If using Maven, include the following dependency in your `pom.xml`:
 
 xml
 <dependency>
@@ -11,67 +69,4 @@ xml
 </dependency>
 
 
-Here is the test case code for the `AddNumbersFunction`:
-
-
-import static org.junit.Assert.assertEquals;
-import org.junit.Test;
-
-public class AddNumbersFunctionTest {
-
-    @Test
-    public void testAddFunction() {
-        // Test case 1
-        int num1 = 12345;
-        int num2 = 54321;
-        int expectedResult = 66666;
-        int actualResult = AddNumbersFunction.addFunction(num1, num2);
-        assertEquals(expectedResult, actualResult);
-
-        // Test case 2
-        num1 = -1;
-        num2 = 1;
-        expectedResult = 0;
-        actualResult = AddNumbersFunction.addFunction(num1, num2);
-        assertEquals(expectedResult, actualResult);
-        
-        // Test case 3
-        num1 = 0;
-        num2 = 0;
-        expectedResult = 0;
-        actualResult = AddNumbersFunction.addFunction(num1, num2);
-        assertEquals(expectedResult, actualResult);
-        
-        // Test case 4
-        num1 = Integer.MAX_VALUE;
-        num2 = 0;
-        expectedResult = Integer.MAX_VALUE;
-        actualResult = AddNumbersFunction.addFunction(num1, num2);
-        assertEquals(expectedResult, actualResult);
-        
-        // Test case 5
-        num1 = Integer.MIN_VALUE;
-        num2 = 0;
-        expectedResult = Integer.MIN_VALUE;
-        actualResult = AddNumbersFunction.addFunction(num1, num2);
-        assertEquals(expectedResult, actualResult);
-
-        // Test case 6
-        num1 = Integer.MAX_VALUE;
-        num2 = Integer.MAX_VALUE;
-        expectedResult = (long) Integer.MAX_VALUE + (long) Integer.MAX_VALUE; // Ensure to handle overflow
-        actualResult = AddNumbersFunction.addFunction(num1, num2);
-        // Add assertion for overflow
-        assertEquals(expectedResult, (long) actualResult);
-    }
-}
-
-
-### Explanation:
-- The `AddNumbersFunctionTest` class contains multiple test cases for the `addFunction` method.
-- Each test case calls the `addFunction` with different input values and asserts that the result matches the expected output.
-- We also include tests for edge cases like negative numbers, zero, and integer overflow conditions.
-- Here, `assertEquals` is used to check the equality of expected and actual results.
-
-### Note:
-Remember to run your tests using a test runner, which is provided by your IDE (like Eclipse, IntelliJ) or from the command line if you're using Maven or Gradle.
+For newer versions of JUnit (like JUnit 5), you would adjust the imports and annotations accordingly.
