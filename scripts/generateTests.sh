@@ -6,7 +6,7 @@ ENDPOINT="https://api.openai.com/v1/chat/completions"
 # Define the model and prompt
 MODEL="gpt-4o-mini"
 #PROMPT="Generate test case for this java code"
-PROMPT="Generate test case code in java for $(cat src/java/AddNumbersFunction.java | tr -d '\n')" 
+PROMPT="Generate test case code in java in single line: $(cat src/java/AddNumbersFunction.java | tr -d '\n')" 
        
 echo "prompt is $PROMPT"
  #Prepare the JSON payload
@@ -33,4 +33,5 @@ echo "Raw response $RESPONSE"
 echo "filtered response"
 echo "$RESPONSE"  |  tr -d '\000-\037' | jq -r '.choices[0].message.content'  | echo
 #echo "$RESPONSE"  | jq -r '.choices[0].message.content'  | jq '.text | @json'| sed -n '/```/,/```/p' | sed 's/```[a-z]*//g' | sed -e 's/{/ {\n    /g' -e 's/;[ ]*/;\n    /g' -e 's/}/\n}/g' -e 's/    }/}/g' | sed '/^$/d' >  tests/java/AddNumbersFunctionTest.java
-echo "$RESPONSE"  |  tr -d '\000-\037' | jq -r '.choices[0].message.content' | sed 's/```java//g' | sed 's/```//g'  > tests/java/AddNumbersFunctionTest.java
+#echo "$RESPONSE"  |  tr -d '\000-\037' | jq -r '.choices[0].message.content' | sed 's/```java//g' | sed 's/```//g'  > tests/java/AddNumbersFunctionTest.java
+echo "$RESPONSE"  |  tr -d '\000-\037' | jq -r '.choices[0].message.content' | sed -n '/```/,/```/p' | sed 's/```[a-z]*//g' | sed -e 's/{/ {\n    /g' -e 's/;[ ]*/;\n    /g' -e 's/}/\n}/g' -e 's/    }/}/g' | sed '/^$/d' > tests/java/AddNumbersFunctionTest.java
