@@ -1,8 +1,7 @@
 public class AddNumbersFunction  {
      public static void main(String[] args)  {
-     int NUM1 = 12345, NUM2 = 54321, RESULT = 0;
-    RESULT = addFunction(NUM1, NUM2);
-    System.out.println(RESULT);
+     int num1 = 12345, num2 = 54321, result = addFunction(num1, num2);
+    System.out.println(result);
     
 } static int addFunction(int param1, int param2)  {
      return param1 + param2;
