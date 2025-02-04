@@ -1,0 +1,47 @@
+{
+    "IDENTIFICATION_DIVISION": {
+        "PROGRAM_ID": "AddNumbersFunction"
+    },
+    "ENVIRONMENT_DIVISION": {
+        "INPUT_OUTPUT_SECTION": {}
+    },
+    "DATA_DIVISION": {
+        "WORKING_STORAGE_SECTION": {
+            "NUM1": {
+                "PIC": "9(5)",
+                "VALUE": 12345
+            },
+            "NUM2": {
+                "PIC": "9(5)",
+                "VALUE": 54321
+            },
+            "RESULT": {
+                "PIC": "9(5)",
+                "VALUE": 0
+            }
+        },
+        "LINKAGE_SECTION": {
+            "PARAM1": {
+                "PIC": "9(5)"
+            },
+            "PARAM2": {
+                "PIC": "9(5)"
+            },
+            "FUNCTION_RESULT": {
+                "PIC": "9(5)"
+            }
+        }
+    },
+    "PROCEDURE_DIVISION": {
+        "operations": [
+            {
+                "operation": "ADD",
+                "operands": [
+                    "PARAM1",
+                    "PARAM2"
+                ],
+                "result": "FUNCTION-RESULT"
+            }
+        ]
+    }
+}
