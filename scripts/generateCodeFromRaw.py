@@ -7,10 +7,6 @@ from langchain.schema import BaseOutputParser
 from langchain_community.chat_models import AzureChatOpenAI
 
 
- 
-#os.environ["OPENAI_API_KEY"] = "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"
-
-#os.environ["AZURE_OPENAI_API_KEY"] = "5Yo5vDcMqXQKthSerd8BusoE8i4RgCy88dp5qNnicT6BSQ3YLwTlJQQJ99BBACHYHv6XJ3w3AAABACOGyjSJ"
 os.environ["AZURE_OPENAI_API_KEY"]
 os.environ["AZURE_OPENAI_ENDPOINT"] = "https://dbs-openai-gpt-4o1-poc01.openai.azure.com/"
 
@@ -21,8 +17,10 @@ llm = AzureChatOpenAI(
     temperature=0.2                          # Adjust the creativity of the response
 )
 
+
 with open('scripts/prompts/generateCodeFromRaw.txt', 'r') as file:
     prompt = file.read()
+
 
 with open('src/cobol/addnumbers.cbl', 'r') as file:
     cobol_code = file.read()
@@ -55,14 +53,23 @@ output_parser = JavaCodeStripperOutputParser()
 chain = prompt_template | llm | output_parser
 
 
-response = chain.invoke(
-    {
-        "cobol_code": cobol_code
-    }
-)
+# Loop through all .cbl files in the src/cobol directory
+for cobol_file in glob.glob('src/cobol/*.cbl'):
+    with open(cobol_file, 'r') as file:
+        cobol_code = file.read()
+
+    response = chain.invoke(
+        {
+            "cobol_code": cobol_code
+        }
+    )
+
+    output_file = cobol_file.replace('src/cobol', 'src/java/fromraw').replace('.cbl', 'Function.java')
+    with open(output_file, "w") as file:
+        file.write(response)
 
 print(prompt_template)
 print(response)
 
-with open("src/java/fromraw/AddNumbersFunction.java", "w") as file:
-    file.write(response)
+#with open("src/java/fromraw/AddNumbersFunction.java", "w") as file:
+ #   file.write(response)
