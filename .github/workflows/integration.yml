@@ -9,9 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
-      
+    steps:      
       # Step 1: Install Pyhton
       - name: Set up Python
         uses: actions/setup-python@v4
