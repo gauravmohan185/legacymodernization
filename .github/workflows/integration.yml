@@ -47,3 +47,38 @@ jobs:
       # Step 7: Generate AST From COBOL 
       - name: Build Application
         run: mvn -Dsource.file=src/main/cobol/addnumbers.cobol -Dtarget.directory=target/ -Dast.style=asis exec:java        
+      
+      # Step 8: Checkout Python Script 
+      - name: Checkout Java Code for AST Generation
+        uses: actions/checkout@v4
+        with:
+          repository: gauravmohan185/legacymodernization
+
+      # Step 9: Execute Prompt
+      - name: Run Python Script
+        run: python scripts/prompts/ast_prompt.py
+
+      # Runs a set of commands using the runners shell
+      - name: Run Generate Java Code
+        run: |
+          chmod +x ./scripts/generateCode.sh
+           ./scripts/generateCode.sh
+           git config --global user.email "gauravmohan185@live.com"
+           git config --global user.name "Gaurav Mohan"
+           git pull
+           git status
+           git add .
+           git commit -m "added generated java code"
+           git push
+
+      - name: Run Generate Java Tests
+        run: |
+          chmod +x ./scripts/generateTests.sh
+           ./scripts/generateTests.sh
+           git config --global user.email "gauravmohan185@live.com"
+           git config --global user.name "Gaurav Mohan"
+           git pull
+           git status
+           git add .
+           git commit -m "added generated java test cases"
+           git push
