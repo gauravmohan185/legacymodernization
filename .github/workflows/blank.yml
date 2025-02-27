@@ -4,8 +4,6 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  # On demand trigger
-  workflow_dispatch:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
@@ -36,26 +34,6 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-
-# Begin java code
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: maven
-      - name: checkout ast code
-        uses: actions/checkout@master
-        with:
-          name: gopinnath/day0-cobol-extractor
-          ref: refs/tags/0.1d
-          
-      - name: Install Proleap to Local Repo
-        run: mvn install:install-file -Dfile=lib/proleap-cobol-parser-4.0.0.jar
-      
-      - name: Build Application
-        run: mvn install
-# End java code
 
       - name: Run Python Script
         run: python scripts/prompts/ast_prompt.py
