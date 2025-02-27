@@ -45,8 +45,11 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: checkout ast code
-        uses: gopinnath/day0-cobol-extractor@0.1d
-
+        uses: actions/checkout@master
+        with:
+          name: gopinnath/day0-cobol-extractor
+          ref: refs/tags/0.1d
+          
       - name: Install Proleap to Local Repo
         run: mvn install:install-file -Dfile=lib/proleap-cobol-parser-4.0.0.jar
       
