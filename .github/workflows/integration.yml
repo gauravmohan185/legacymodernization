@@ -16,19 +16,14 @@ jobs:
         with:
           python-version: "3.12"
           
-      # Step 2: Install Pyhton Dependencies
-      - name: Install Dependencies
-        run: |
-          python -m pip install --upgrade pip
-          
-      # Step 3: Checkout AST Generation code
+      # Step 2: Checkout AST Generation code
       - name: Checkout Java Code for AST Generation
         uses: actions/checkout@v4
         with:
           repository: gopinnath/day0-cobol-extractor
           token: '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'
       
-      # Step 4: Install JDK
+      # Step 3: Install JDK
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -36,30 +31,30 @@ jobs:
           distribution: 'temurin'
           cache: maven
           
-      # Step 5: Install Proleap to Local repo
+      # Step 4: Install Proleap to Local repo
       - name: Install Proleap to Local Repo
         run: mvn install:install-file -Dfile=lib/proleap-cobol-parser-4.0.0.jar
         
-      # Step 6: Install Proleap to Local repo
+      # Step 5: Install Proleap to Local repo
       - name: Build Application
         run: mvn install
         
-      # Step 7: Generate AST From COBOL 
+      # Step 6: Generate AST From COBOL 
       - name: Build Application
         run: mvn -Dsource.file=src/main/cobol/addnumbers.cobol -Dtarget.directory=target/ -Dast.style=asis exec:java        
       
-      # Step 8: Checkout Python Script 
+      # Step 7: Checkout Python Script 
       - name: Checkout Java Code for AST Generation
         uses: actions/checkout@v4
         with:
           repository: gauravmohan185/legacymodernization
 
-      # Step 9: Install Python for Python
+      # Step 8: Install Python for Python
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           
-      # Step 10: Execute Prompt
+      # Step 9: Execute Prompt
       - name: Run Python Script
         run: python scripts/prompts/ast_prompt.py
 
