@@ -26,6 +26,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: gopinnath/day0-cobol-extractor
+          token: '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'
       
       # Step 4: Install JDK
       - name: Set up JDK 17
