@@ -5,6 +5,8 @@ on:
   push:
     branches: [ "java-integration" ]
     
+permissions: write-all
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -44,7 +46,7 @@ jobs:
         run: mvn -Dsource.file=src/main/cobol/addnumbers.cobol -Dtarget.directory=target/ -Dast.style=asis exec:java        
       
       # Step 7: Checkout Python Script 
-      - name: Checkout Java Code for AST Generation
+      - name: Checkout Local Repo
         uses: actions/checkout@v4
         with:
           repository: gauravmohan185/legacymodernization
