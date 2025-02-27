@@ -23,20 +23,20 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           
-      # Step 3: Install JDK
+      # Step 3: Checkout AST Generation code
+      - name: Checkout Java Code for AST Generation
+        uses: actions/checkout@v4
+        with:
+          uses: gopinnath/day0-cobol-extractor
+          ref: refs/tags/0.1d     
+      
+      # Step 4: Install JDK
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-          
-      # Step 4: Checkout AST Generation code
-      - name: Checkout Java Code for AST Generation
-        uses: actions/checkout@v4
-        with:
-          uses: gopinnath/day0-cobol-extractor
-          ref: refs/tags/0.1d
           
       # Step 5: Install Proleap to Local repo
       - name: Install Proleap to Local Repo
