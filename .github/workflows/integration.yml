@@ -3,8 +3,9 @@ name: Integrated Pipeline
 on:
   workflow_dispatch:
   push:
-    branches: [ "java-integration" ]
-    
+    branches: [ "main","java-integration"  ]
+  pull_request:
+    branches: [ "main" ]
 permissions: write-all
 
 jobs:
