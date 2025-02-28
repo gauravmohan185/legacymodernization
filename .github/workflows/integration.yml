@@ -1,0 +1,89 @@
+name: Integrated Pipeline
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main","java-integration"  ]
+  pull_request:
+    branches: [ "main" ]
+permissions: write-all
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:      
+      # Step 1: Install Pyhton
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+          
+      # Step 2: Checkout AST Generation code
+      - name: Checkout Java Code for AST Generation
+        uses: actions/checkout@v4
+        with:
+          repository: gopinnath/day0-cobol-extractor
+          token: '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'
+      
+      # Step 3: Install JDK
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+          
+      # Step 4: Install Proleap to Local repo
+      - name: Install Proleap to Local Repo
+        run: mvn install:install-file -Dfile=lib/proleap-cobol-parser-4.0.0.jar
+        
+      # Step 5: Install Proleap to Local repo
+      - name: Build Application
+        run: mvn install
+        
+      # Step 6: Generate AST From COBOL 
+      - name: Build Application
+        run: mvn -Dsource.file=src/main/cobol/addnumbers.cobol -Dtarget.directory=target/ -Dast.style=asis exec:java        
+      
+      # Step 7: Checkout Python Script 
+      - name: Checkout Local Repo
+        uses: actions/checkout@v4
+        with:
+          repository: gauravmohan185/legacymodernization
+
+      # Step 8: Install Python for Python
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install langchain
+          python -m pip install langchain_community
+          
+      # Step 9: Execute Prompt
+      - name: Run Python Script
+        run: python scripts/prompts/ast_prompt.py
+
+      # Runs a set of commands using the runners shell
+      - name: Run Generate Java Code
+        run: |
+          chmod +x ./scripts/generateCode.sh
+           ./scripts/generateCode.sh
+           git config --global user.email "gauravmohan185@live.com"
+           git config --global user.name "Gaurav Mohan"
+           git pull
+           git status
+           git add .
+           git commit -m "added generated java code"
+           git push
+
+      - name: Run Generate Java Tests
+        run: |
+          chmod +x ./scripts/generateTests.sh
+           ./scripts/generateTests.sh
+           git config --global user.email "gauravmohan185@live.com"
+           git config --global user.name "Gaurav Mohan"
+           git pull
+           git status
+           git add .
+           git commit -m "added generated java test cases"
+           git push
