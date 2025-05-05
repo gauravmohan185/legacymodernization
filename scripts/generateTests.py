@@ -7,7 +7,7 @@ from langchain.schema import BaseOutputParser
 
 
  
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = ""
 
 with open('scripts/prompts/generateTests.txt', 'r') as file:
     prompt = file.read()
