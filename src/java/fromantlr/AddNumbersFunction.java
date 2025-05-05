@@ -15,13 +15,14 @@ public class AddNumbersFunction {
         this.result = 0;
     }
 
-    public void addNumbers(int param1, int param2) {
+    public void add(int param1, int param2) {
         try {
-            logger.info("Starting addition of {} and {}", param1, param2);
-            this.result = param1 + param2;
-            logger.info("Addition result: {}", this.result);
+            this.num1 = param1;
+            this.num2 = param2;
+            this.result = this.num1 + this.num2;
+            logger.info("Addition performed: {} + {} = {}", this.num1, this.num2, this.result);
         } catch (Exception e) {
-            logger.error("Error occurred during addition: {}", e.getMessage());
+            logger.error("Error occurred while adding numbers: {}", e.getMessage());
         }
     }
 
@@ -31,7 +32,7 @@ public class AddNumbersFunction {
 
     public static void main(String[] args) {
         AddNumbersFunction addNumbersFunction = new AddNumbersFunction();
-        addNumbersFunction.addNumbers(addNumbersFunction.num1, addNumbersFunction.num2);
-        System.out.println("The result of addition is: " + addNumbersFunction.getResult());
+        addNumbersFunction.add(12345, 54321);
+        System.out.println("Result of addition: " + addNumbersFunction.getResult());
     }
 }

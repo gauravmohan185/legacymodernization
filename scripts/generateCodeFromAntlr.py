@@ -1,7 +1,7 @@
 import os
 
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_openai import ChatOpenAI
+#from langchain_openai import ChatOpenAI
 from langchain.chains import LLMChain
 from langchain.schema import BaseOutputParser
 from langchain_community.chat_models import AzureChatOpenAI
