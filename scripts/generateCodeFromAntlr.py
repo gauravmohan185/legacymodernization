@@ -8,9 +8,6 @@ from langchain_community.chat_models import AzureChatOpenAI
 
 
  
-#os.environ["OPENAI_API_KEY"] = "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"
-
-#os.environ["AZURE_OPENAI_API_KEY"] = "5Yo5vDcMqXQKthSerd8BusoE8i4RgCy88dp5qNnicT6BSQ3YLwTlJQQJ99BBACHYHv6XJ3w3AAABACOGyjSJ"
 os.environ["AZURE_OPENAI_API_KEY"]
 os.environ["AZURE_OPENAI_ENDPOINT"] = "https://dbs-openai-gpt-4o1-poc01.openai.azure.com/"
 
